@@ -134,3 +134,56 @@ ErrorMvcAutoConfiguration
 - 借助模板引擎提供自己错误页面，例如 erro.html ,  ErrorTemplateMissingCondition会对此进行检查
 
 转码 HttpEncodingAutoConfiguration 使用spring提供的CharacterEncodingFilter类
+
+###### 3.4  嵌入式Servlet容器 Tomcat配置
+
+EmbeddedServletContainerAutoConfiguration类中配置者tomcat jetty
+
+**Http端口**：
+
+​	在application.properties 中定义 server.port 
+
+​	当server.prot设为-1 禁用http 
+
+​	设为0  随机启动端口 利于测试
+
+**SSL配置**
+
+**其他配置**：
+
+SpringBoot内置3项内容：
+
+JacksonAutoConfiguration 使用jackson进行json序列化
+
+在HttpMessageConvertersAutoConfiguratation中，声明默认的HttpMessageConverter
+
+在JmxAutoConfiguration中，声明JMX功能
+
+### 二 精通MVC架构
+
+###### 1 贫血模型介绍
+
+面向对象的范式应用到领域对象之中，若没有则称之为贫血的领域模型
+
+特征：
+
+- 模型是由简单的java对象构成(POJO)，只有get和set方法
+- 所有业务逻辑都是在服务层处理
+- 对模型的校验在本模型外部进行，例如控制器
+
+贫血模型是较差的实践方式
+
+避免领域贫血途径：
+
+- 服务层适合进行应用级别的抽象（如 事务处理），而不是业务逻辑
+
+- 领域对象应始终处于合法状态。如通过校验器或jsr-303 校验注解，让校验过程在表单对象进行
+- 将输入转换成有意义的领域对象
+- 将数据层安装Respository的方式实现，例如参考Spring Data规范
+- 将领域逻辑与底层持久化框架解耦
+- 尽可能使用实际对象
+
+###### 2 SpringMVC
+
+###### 3 构件Spring Social twitter
+
